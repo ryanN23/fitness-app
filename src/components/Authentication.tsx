@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Authentication.css';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -60,37 +61,43 @@ const Authentication: React.FC = () => {
       <div>
         <h3>Register User</h3>
         <input
+          className="input-field"
           placeholder="Email..."
           value={registerEmail}
           onChange={(event) => setRegisterEmail(event.target.value)}
         />
         <input
+          className="input-field"
+          type='password'
           placeholder="Password..."
           value={registerPassword}
           onChange={(event) => setRegisterPassword(event.target.value)}
         />
-        <button onClick={register}>Create User</button>
+        <button className='action-button' onClick={register}>Create User</button>
       </div>
 
       <div>
         <h3>Login</h3>
         <input
+          className="input-field"
           placeholder="Email..."
           value={loginEmail}
           onChange={(event) => setLoginEmail(event.target.value)}
         />
         <input
+          className="input-field"
           placeholder="Password..."
+          type='password'
           value={loginPassword}
           onChange={(event) => setLoginPassword(event.target.value)}
         />
-        <button onClick={login}>Login</button>
+        <button className='action-button' onClick={login}>Login</button>
       </div>
 
       <h4>User Logged In:</h4>
       {user ? user.email : 'No user logged in'}
 
-      {user && <button onClick={logout}>Sign Out</button>}
+      {user && <button className="action-button logout" onClick={logout}>Sign Out</button>}
     </div>
   );
 };

@@ -19,7 +19,6 @@ const Tab2: React.FC = () => {
         </IonHeader>
         {/* <ExploreContainer name="THomer" /> */}
         <Card />
-        <Card />
       </IonContent>
     </IonPage>
   );
