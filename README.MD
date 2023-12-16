@@ -38,10 +38,13 @@ A step-by-step series of examples that tell you how to get a development environ
 2. **Navigate to the project directory:**
    ```bash
    cd your-repository
+   ```
 
 3. **Install Dependencies**
     - In the project directory, run the following command to install the necessary packages:
+   ```bash
     npm install
+   ```
 
 4. **Open the Project in VS Code**
     - Open Visual Studio Code and use the 'Open Folder' option to open the project directory.
