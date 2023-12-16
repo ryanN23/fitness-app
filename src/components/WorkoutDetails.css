@@ -1,0 +1,33 @@
+/* WorkoutDetails.css */
+.workout-details {
+    text-align: center;
+  }
+  
+  .workout-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .workout-details h2 {
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  .workout-details p {
+    color: #f7f3f3;
+    font-size: 1rem;
+  }
+  
+  .workout-details ul {
+    list-style-type:decimal;
+    padding: 0 25px 0 25px;
+  }
+  
+  .workout-details li {
+    background-color: #5c2020;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  

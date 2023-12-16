@@ -1,56 +1,79 @@
+/* UserProfile.css */
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .user-profile {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .statistics {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .statistics h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .statistics ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .statistics ul li {
-    margin: 5px 0;
-    font-size: 16px;
-  }
-  
-  .user-profile label {
-    display: block;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .user-profile input {
-    width: 100%;
-    padding: 5px;
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-  
-  .user-profile button {
-    width: 100%;
-    font-size: 16px;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007aff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .user-profile button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Add more styles as needed */
-  
-  
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Limit the width for larger screens */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+
+.user-profile p {
+  color: black;
+  font-size: 20px;
+}
+
+.statistics {
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.statistics h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.statistics ul {
+  list-style: none;
+  padding: 0;
+}
+
+.statistics ul li {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.user-profile label {
+  display: block;
+  font-size: 16px;
+  margin-top: 15px;
+  color: #444;
+}
+
+.user-profile input {
+  width: calc(100% - 10px);
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.user-profile ion-button {
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 12px;
+}
+
+.user-profile ion-button {
+  --background: #007aff;
+  --background-activated: #0056b3;
+  --background-hover: #0056b3;
+  --color: #fff;
+}
+
+.user-profile ion-button:active {
+  --background: #0056b3;
+}

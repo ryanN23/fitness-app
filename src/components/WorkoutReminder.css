@@ -1,0 +1,55 @@
+/* WorkoutReminder.css */
+
+.workout-reminder {
+    padding: 10px;
+}
+
+.workout-reminder ion-header {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.workout-reminder ion-title {
+    color: white;
+}
+
+.workout-reminder ion-list {
+    margin: 10px 0;
+}
+
+.workout-reminder ion-item {
+    --background: #080808;
+    --border-color: #e0e0e0;
+    border-bottom: 1px solid var(--border-color);
+    --padding-start: 20px;
+    --inner-padding-end: 20px;
+    --min-height: 50px;
+}
+
+.workout-reminder ion-label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.workout-reminder ion-checkbox {
+    --background: #fff;
+    --background-checked: #4a90e2;
+    --border-color: #4a90e2;
+    --border-color-checked: #4a90e2;
+    --checkmark-color: #fff;
+}
+
+.workout-reminder ion-datetime {
+    display: block;
+    margin: 20px 15px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --background: #111010;
+    --placeholder-color: #666;
+    --text-color: #333;
+}
+
+.workout-reminder ion-button {
+    margin: 15px;
+    --background: #4a90e2;
+}

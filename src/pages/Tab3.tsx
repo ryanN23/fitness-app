@@ -12,11 +12,6 @@ const Tab3: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Workout Reminder</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <IonTabButton tab="workout-reminder">
            <WorkoutReminder></WorkoutReminder>
          </IonTabButton>

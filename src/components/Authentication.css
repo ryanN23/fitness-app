@@ -47,3 +47,7 @@
     background-color: #E64A19;
   }
   
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }

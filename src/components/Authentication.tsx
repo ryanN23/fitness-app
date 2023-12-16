@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Authentication.css';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  Auth,
-  User
 } from 'firebase/auth';
-import { auth } from './firebase-config';
+import { auth, firestore } from './firebase-config'; 
+import { doc, setDoc } from 'firebase/firestore';
 
 const Authentication: React.FC = () => {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
+  const [registerHeight, setRegisterHeight] = useState('');
+  const [registerWeight, setRegisterWeight] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  const [isLoginView, setIsLoginView] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
-  const [user, setUser] = useState<User | null>(null);
+  const clearErrorMessage = () => {
+    setErrorMessage('');
+  };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+  const switchToLogin = () => {
+    setIsLoginView(true);
+    clearErrorMessage();
+  };
 
-    return () => unsubscribe();
-  }, []);
+  const switchToRegister = () => {
+    setIsLoginView(false);
+    clearErrorMessage();
+  };
 
   const register = async () => {
     try {
@@ -33,71 +38,97 @@ const Authentication: React.FC = () => {
         registerEmail,
         registerPassword
       );
+
+      const userDocRef = doc(firestore, 'users', newUser.user.uid);
+      await setDoc(userDocRef, {
+        email: registerEmail,
+        height: parseFloat(registerHeight),
+        weight: parseFloat(registerWeight),
+      });
+
       console.log(newUser);
     } catch (error: any) {
-      console.log(error.message);
+      if (error.code === 'auth/invalid-email') {
+        setErrorMessage('Invalid email address.');
+      } else if (error.code === 'auth/weak-password') {
+        setErrorMessage('Password should be at least 6 characters.');
+      } else {
+        setErrorMessage('Error during registration.');
+      }
     }
   };
 
   const login = async () => {
     try {
-      const loggedInUser = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      const loggedInUser = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
       console.log(loggedInUser);
-    } catch (error:any) {
-      console.log(error.message);
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await signOut(auth);
-    } catch (error:any) {
-      console.log(error.message);
+    } catch (error: any) {
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        setErrorMessage('Incorrect email or password.');
+      } else {
+        setErrorMessage('Invalid login.');
+      }
     }
   };
 
   return (
     <div className="Authentication">
-      <div>
-        <h3>Register User</h3>
-        <input
-          className="input-field"
-          placeholder="Email..."
-          value={registerEmail}
-          onChange={(event) => setRegisterEmail(event.target.value)}
-        />
-        <input
-          className="input-field"
-          type='password'
-          placeholder="Password..."
-          value={registerPassword}
-          onChange={(event) => setRegisterPassword(event.target.value)}
-        />
-        <button className='action-button' onClick={register}>Create User</button>
-      </div>
-
-      <div>
-        <h3>Login</h3>
-        <input
-          className="input-field"
-          placeholder="Email..."
-          value={loginEmail}
-          onChange={(event) => setLoginEmail(event.target.value)}
-        />
-        <input
-          className="input-field"
-          placeholder="Password..."
-          type='password'
-          value={loginPassword}
-          onChange={(event) => setLoginPassword(event.target.value)}
-        />
-        <button className='action-button' onClick={login}>Login</button>
-      </div>
-
-      <h4>User Logged In:</h4>
-      {user ? user.email : 'No user logged in'}
-
-      {user && <button className="action-button logout" onClick={logout}>Sign Out</button>}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      {isLoginView ? (
+        <div>
+          <h3>Login</h3>
+          <input
+            className="input-field"
+            placeholder="Email..."
+            value={loginEmail}
+            onChange={(event) => setLoginEmail(event.target.value)}
+          />
+          <input
+            className="input-field"
+            type="password"
+            placeholder="Password..."
+            value={loginPassword}
+            onChange={(event) => setLoginPassword(event.target.value)}
+          />
+          <button className="action-button" onClick={login}>Login</button>
+          <button className="switch-button" onClick={switchToRegister}>Don't have an account? Register</button>
+        </div>
+      ) : (
+        <div>
+          <h3>Register User</h3>
+          <input
+            className="input-field"
+            placeholder="Email..."
+            value={registerEmail}
+            onChange={(event) => setRegisterEmail(event.target.value)}
+          />
+          <input
+            className="input-field"
+            type="password"
+            placeholder="Password..."
+            value={registerPassword}
+            onChange={(event) => setRegisterPassword(event.target.value)}
+          />
+          <input
+            className="input-field"
+            placeholder="Height (in inches)..."
+            value={registerHeight}
+            onChange={(event) => setRegisterHeight(event.target.value)}
+          />
+          <input
+            className="input-field"
+            placeholder="Weight (in pounds)..."
+            value={registerWeight}
+            onChange={(event) => setRegisterWeight(event.target.value)}
+          />
+          <button className="action-button" onClick={register}>Create User</button>
+          <button className="switch-button" onClick={switchToLogin}>Already have an account? Login</button>
+        </div>
+      )}
     </div>
   );
 };

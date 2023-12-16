@@ -1,0 +1,22 @@
+/* TargetGroupCard.css */
+.target-group-card h2 {
+    text-align: center;
+    color: #4a4a4a;
+  }
+
+  .target-group-card ion-card {
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .target-group-card ion-card-content {
+    background-color: #f0f0f0;
+    color: black;
+    padding-top: 5px;
+  }
+  
+  .target-group-card ion-card-header {
+    background-color: #28a745;
+    color: white;
+  }
+  
