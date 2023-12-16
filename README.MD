@@ -37,7 +37,7 @@ A step-by-step series of examples that tell you how to get a development environ
 
 2. **Navigate to the project directory:**
    ```bash
-   cd your-repository
+   cd fitness-app-main
    ```
 
 3. **Install Dependencies**
